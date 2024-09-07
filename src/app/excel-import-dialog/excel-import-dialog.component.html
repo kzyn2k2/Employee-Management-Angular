@@ -1,0 +1,13 @@
+<h2 matDialogTitle>Import Excel Data</h2>
+<mat-dialog-content style="width: 400px">
+  <div class="d-flex justify-content-center mb-2">
+  <input type="file" (change)="importHandler($event)" id="imp" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" style="display:  none;">
+  <label for="imp" class="btn btn-success">Select Import File</label>
+</div>
+<mat-error *ngIf="error">Error: {{error}}</mat-error>
+</mat-dialog-content>
+<mat-dialog-actions class="d-flex justify-content-end">
+  <button class="btn btn-dialog me-2" (click)="onConfirm()" *ngIf="excel"><i class="bi bi-upload"></i> Import</button>
+  <button class="btn btn-dialog" (click)="onCancel()"><i class="bi bi-x-lg"></i> Cancel</button>
+</mat-dialog-actions>
+

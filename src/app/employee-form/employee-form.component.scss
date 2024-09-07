@@ -1,0 +1,118 @@
+.container{
+  margin-top: 60px;
+  position: absolute;
+  width: 100vw;
+  max-width: none;
+
+}
+
+.form-box, .form-header{
+
+  width: 95vw;
+  margin: auto;
+
+}
+
+
+form{
+  padding: 20px;
+  margin-top: 10px;
+}
+
+.form-label{
+  font-size: 18px;
+}
+
+mat-form-field{
+  width: 100%;
+
+}
+
+
+
+
+.form-box{
+  background-color: #C9D6EA;
+}
+
+.preview-box{
+  width: 150px;
+  height: 150px;
+  border: 1px solid black;
+}
+
+.preview{
+  width: 150px;
+  height: 150px;
+}
+
+.radio-label{
+  display: block;
+  text-align: start;
+  font-size: 13px;
+  font-family: Roboto;
+  color: grey;
+  margin-left: 10px;
+}
+
+.radio-margin{
+  margin-right: 5px;
+  @media (max-width: 1290px) and (min-width: 1200px) {
+    margin-right: 0px;
+  }
+
+}
+
+.img-col{
+  @media (max-width: 400px) {
+    height: 300px;
+  }
+}
+
+.expandable{
+  @media (max-width: 765px) {
+    width: 90vw;
+    max-width: none;
+  }
+}
+
+.error-mess{
+  font-size: 12px;
+  color: red;
+}
+
+.qual-table, .qual-but{
+  font-weight: bold;
+  font-family: Roboto;
+  font-size: 14px;
+}
+
+.qual-but{
+  right: 0;
+  border: 0;
+  display: flex;
+  background-color: #C9D6EA;
+}
+
+
+.hide{
+  display: inline;
+  @media (max-width: 865px) {
+    display: none;
+  }
+
+}
+
+.qual-remove, .btn-image, .form-but{
+
+  background-color: #29335C;
+  color: white;
+  font-size: 14px;
+
+}
+
+.gender-col{
+  @media (max-width: 770px) {
+    margin-bottom: 20px;
+  }
+}

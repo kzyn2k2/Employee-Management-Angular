@@ -1,0 +1,207 @@
+<div class="container">
+  <div class="form-header mt-3">
+    <p><b>{{syskey != null ? 'Update Employee Information' : 'Register Employee'}}</b></p>
+  </div>
+  <div class="form-box mat-elevation-z10">
+    <form (ngSubmit)="uploadForm(f)" #f="ngForm">
+      <div class="mb-3">
+        <button class="btn form-but me-3" type="submit"><i class="bi bi-upload"></i> Submit</button>
+      <button class="btn form-but me-3" type="button" routerLink="/employees"><i class="bi bi-x-lg"></i> Cancel</button>
+      <button class="btn form-but" type="button" (click)="deleteEmployee()" *ngIf="syskey != null"><i class="bi bi-trash3-fill"></i> Delete</button>
+      </div>
+      <div class="row">
+        <div class="col-lg-9 col-sm-8 col-6">
+          <div class="row">
+            <div class="col-xl-2 col-lg-6 col-md-5 col-sm-12">
+              <mat-form-field floatLabel="always">
+                <mat-label class="form-label" >Employee ID</mat-label>
+                <input type="text" maxlength="6" minlength="6" idValidator required matInput name="empid" [disabled]="syskey" [(ngModel)]="form.empId" #empid="ngModel">
+                <mat-error *ngIf="empid.errors?.minlength" class="error-mess">ID must be 6 digits</mat-error>
+                <mat-error *ngIf="empid.errors?.idValidator" class="error-mess">Invalid format</mat-error>
+                <mat-error class="error-mess" *ngIf="empid.errors?.required">Required</mat-error>
+                <mat-error class="error-mess" *ngIf="empid.errors?.duplicate">Duplicate value</mat-error>
+              </mat-form-field>
+
+            </div>
+            <div class="col-xl-3 col-lg-6 col-md-7 col-sm-12">
+              <mat-form-field floatLabel="always" class="ff" appearance="fill">
+                <mat-label class="form-label">Name</mat-label>
+                <input type="text" nameValidator required matInput name="name" [(ngModel)]="form.name" #name="ngModel">
+                <mat-error *ngIf="name.errors?.nameValidator" class="error-mess">Invalid name</mat-error>
+                <mat-error class="error-mess" *ngIf="name.errors?.required">Required</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+              <mat-form-field floatLabel="always">
+                <mat-label class="form-label">Father Name</mat-label>
+                <input type="text" nameValidator required matInput name="fname" [(ngModel)]="form.fatherName" #fname="ngModel">
+                <mat-error *ngIf="fname.errors?.nameValidator" class="error-mess">Invalid name</mat-error>
+                <mat-error class="error-mess" *ngIf="fname.errors?.required">Required</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-xl-4 col-lg-6 col-md-6 col-12">
+              <mat-form-field floatLabel="always">
+                <mat-label class="form-label">Email</mat-label>
+                <input type="email" email required matInput name="email" [(ngModel)]="form.email" #email="ngModel">
+                <mat-error *ngIf="email.errors?.email" class="error-mess">Invalid format</mat-error>
+                <mat-error class="error-mess" *ngIf="email.errors?.required">Required</mat-error>
+                <mat-error class="error-mess" *ngIf="email.errors?.duplicate">Duplicate value</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="expandable">
+              <div class="row">
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-4 col-4">
+                  <mat-form-field floatLabel="always">
+                    <mat-label class="form-label">Mobile</mat-label>
+                    <input type="text" mobileValidator required matInput name="mobile" [(ngModel)]="form.mobile" #mobile="ngModel">
+                    <mat-error *ngIf="mobile.errors?.mobileValidator" class="error-mess">Invalid format</mat-error>
+                    <mat-error class="error-mess" *ngIf="mobile.errors?.required">Required</mat-error>
+                    <mat-error class="error-mess" *ngIf="mobile.errors?.duplicate">Duplicate value</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-4 col-4">
+                  <mat-form-field floatLabel="always">
+                    <mat-label class="form-label">NRC</mat-label>
+                    <input type="text" nrcValidator required  matInput name="nrc" [disabled]="syskey" [(ngModel)]="form.nrc" #nrc="ngModel">
+                    <mat-error *ngIf="nrc.errors?.nrcValidator" class="error-mess">Invalid format</mat-error>
+                    <mat-error class="error-mess" *ngIf="nrc.errors?.required">Required</mat-error>
+                    <mat-error class="error-mess" *ngIf="nrc.errors?.duplicate">Duplicate value</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-2 col-lg-4 col-md-4 col-sm-4 col-4">
+                  <mat-form-field floatLabel="always" datepicker>
+                    <mat-label class="form-label">Birthday</mat-label>
+                    <input type="text" (dateInput)="choseDobHandler($event)" [disabled]="syskey" required maxlength="0" matInput name="dob" [(ngModel)]="dateob" [matDatepicker]="dp"#dob>
+                    <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
+                    <mat-datepicker #dp ></mat-datepicker>
+                    <mat-error class="error-mess">Required</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-4 col-lg-7 col-md-8 col-12 gender-col">
+                  <mat-radio-group color="primary" required name="gender" [(ngModel)]="form.gender" #gender="ngModel">
+                    <mat-label class="radio-label">Gender </mat-label>
+                    <mat-radio-button value="Male" class="radio-margin">
+                      Male
+                    </mat-radio-button>
+                    <mat-radio-button value="Female" class="radio-margin">
+                      Female
+                    </mat-radio-button>
+                    <mat-radio-button value="Others">
+                      Others
+                    </mat-radio-button>
+                    <mat-error class="error-mess" *ngIf="gender.errors?.required">Required</mat-error>
+                  </mat-radio-group>
+                </div>
+                <div class="col-xl-3 col-lg-5 col-md-4 col-sm-6 col-6">
+                  <mat-form-field floatLabel="always">
+                    <mat-label class="form-label">Driving License</mat-label>
+                    <input type="text" driverValidator  matInput name="drivingLicense" [disabled]="syskey" [(ngModel)]="form.drivingLicense" #drivingLicense="ngModel">
+                    <mat-error class="error-mess" *ngIf="drivingLicense.errors?.driverValidator">Invalid format</mat-error>
+                    <mat-error class="error-mess" *ngIf="drivingLicense.errors?.duplicate">Duplicate value</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-6">
+                  <mat-form-field floatLabel="always">
+                    <mat-label class="form-label">City</mat-label>
+                    <mat-select required name="city" [(ngModel)]="form.city" #city="ngModel" [compareWith]="customSelectCity">
+                      <mat-option *ngFor="let city of cities" [value]="city">{{city.name}}</mat-option>
+                    </mat-select>
+                    <mat-error class="error-mess">Required</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-xl-6 col-lg-8 col-md-8 col-sm-12 col-12">
+                  <mat-form-field floatLabel="always">
+                    <mat-label class="form-label">Address</mat-label>
+                    <input type="text" required matInput name="address" [(ngModel)]="form.address" #address="ngModel">
+                    <mat-error class="error-mess">Required</mat-error>
+                  </mat-form-field>
+                </div>
+
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+        <div class="col-lg-3 col-sm-4 col-6 text-center img-col">
+          <div class="d-flex justify-content-center mb-3">
+            <div class="preview-box ">
+              <img [src]="preview" class="preview" *ngIf="uploaded">
+            </div>
+          </div>
+          <input
+          id="img"
+          type="file"
+          accept="image/*"
+          (change)="selectImage($event)"
+          style="display: none"
+          [required]="!uploaded"
+          name="image"
+          ngModel
+          #img="ngModel"/>
+        <label for="img" class="btn btn-image">Upload Image</label>
+          <mat-error *ngIf="f.submitted && img.errors?.required">Image is required</mat-error>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-9 col-lg-12">
+          <div class="row qual-table">
+            <div class="col-xl-4 col-3">Type</div>
+            <div class="col-xl-4 col-4">Name</div>
+            <div class="col-xl-2 col-3">Receive On</div>
+            <div class="col-lg-2 col-2">
+              <button class="qual-but" type="button" (click)="addQual()"><i class="bi bi-plus-lg"></i> <span class="hide" >Add</span></button>
+            </div>
+          </div>
+          <ng-container *ngFor="let qf of qualifications; let i = index" >
+          <div class="row" *ngIf="qf.status === 1">
+            <div class="col-xl-4 col-3">
+              <mat-form-field floatLabel="always" class="qf" >
+                <mat-label></mat-label>
+                <mat-select required [name]="'type'+i" [(ngModel)]="qf.type" #qtype="ngModel">
+                  <mat-option *ngFor="let qual of qualTypes" [value]="qual.autokey">{{qual.name}}</mat-option>
+                </mat-select>
+                <mat-error class="error-mess">Required</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-xl-4 col-4">
+              <mat-form-field floatLabel="always" class="qf">
+                <mat-label class="form-label"></mat-label>
+                <input type="text" required matInput [name]="'name'+i" [(ngModel)]="qf.name" #qname="ngModel">
+                <mat-error class="error-mess">Required</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-xl-2 col-3">
+              <mat-form-field yearpicker class="qf">
+                <input
+                  class=""
+                  matInput
+                  required
+                  [matDatepicker]="dpy"
+                  [formControl]="qf.year"
+                  type="number"
+                />
+                <mat-datepicker-toggle matSuffix [for]="dpy"></mat-datepicker-toggle>
+                <mat-datepicker
+                  #dpy
+                  startView="multi-year"
+                  (yearSelected)="chosenYearHandler($event, dpy, i)"
+                >
+                </mat-datepicker>
+                <mat-error class="error-mess">Required</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-lg-2 col-2 d-flex align-items-center">
+              <button (click)="removeQual(i)" class="btn qual-remove"><i class="bi bi-trash3-fill"></i> <span class="hide"> Remove</span></button>
+            </div>
+
+          </div>
+          </ng-container>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>

@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="row mt-2 mb-2">
+    <div class="col-lg-1 col-md-2 col-sm-12">
+      <p>
+        <b>Employees</b>
+     </p>
+    </div>
+    <div class="col-lg-10 col-md-8 col-sm-8 col-9">
+      <div class="searchbox">
+        <input type="text" class="form-control me-2" placeholder="Search" [(ngModel)]="searchText">
+        <button type="button" (click)="getEmployees()" class="btn search me-2"><i class="bi bi-search"></i> <span class="hide"> Search</span></button>
+        <button type="button" (click)="cancelSearch()" class="btn search me-2" *ngIf="searched"><i class="bi bi-arrow-counterclockwise"></i> <span class="hide"> Cancel</span> </button>
+        <button type="button" routerLink="/form" class="btn search"><i class="bi bi-plus-lg"></i> <span class="hide"> Add</span></button>
+      </div>
+
+    </div>
+    <div class="col-lg-1 col-md-2 col-sm-4 col-3">
+      <p >
+        <b>Total: {{total}}</b>
+       </p>
+
+    </div>
+  </div>
+
+    <table mat-table multiTemplateDataRows [dataSource]="employees | paginate: {itemsPerPage: size, currentPage: current, totalItems: total}" class="mat-elevation-z8">
+
+      <tr mat-header-row *matHeaderRowDef="cols" class="theader"></tr>
+        <tr mat-row class="trow"  *matRowDef="let row; columns: cols; when: full" [routerLink]="['/update', row.syskey]"></tr>
+        <tr mat-row  class="trow"  *matRowDef="let row;columns: ['error']; when: empty">
+        </tr>
+        <ng-container matColumnDef="error">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element" colspan="100%">
+            <div class="alert alert-warning text-center mt-3">
+                {{element.message}}
+            </div>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="empid">
+          <th mat-header-cell *matHeaderCellDef>Employee ID</th>
+          <td mat-cell *matCellDef="let employee">{{employee.empId}}</td>
+        </ng-container>
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef>Name</th>
+          <td mat-cell *matCellDef="let element">{{element.name}}</td>
+        </ng-container>
+        <ng-container matColumnDef="fname">
+          <th mat-header-cell *matHeaderCellDef>Father Name</th>
+          <td mat-cell *matCellDef="let element">{{element.fatherName}}</td>
+        </ng-container>
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef>Email</th>
+          <td mat-cell *matCellDef="let element">{{element.email}}</td>
+        </ng-container>
+        <ng-container matColumnDef="mobile">
+          <th mat-header-cell *matHeaderCellDef>Mobile</th>
+          <td mat-cell *matCellDef="let element">{{element.mobile}}</td>
+        </ng-container>
+        <ng-container matColumnDef="nrc">
+          <th mat-header-cell *matHeaderCellDef>NRC</th>
+          <td mat-cell *matCellDef="let element">{{element.nrc}}</td>
+        </ng-container>
+        <ng-container matColumnDef="gender">
+          <th mat-header-cell *matHeaderCellDef>Gender</th>
+          <td mat-cell *matCellDef="let element">{{element.gender}}</td>
+        </ng-container>
+        <ng-container matColumnDef="dob">
+          <th mat-header-cell *matHeaderCellDef>Birthday</th>
+          <td mat-cell *matCellDef="let element">{{element.dob | date: 'dd/MM/yyyy'}}</td>
+        </ng-container>
+
+
+    </table>
+    <div class="spinner-box" *ngIf="employees.length === 0 && loading === true">
+      <div class="spinner-border" role="status">
+      </div>
+    </div>
+    <div class=" d-flex justify-content-center" *ngIf="loading === false && total > 0">
+      <pagination-controls previousLabel="Prev" nextLabel="Next" maxSize="3" class="pagination" (pageChange)="handleChange($event)">
+      </pagination-controls>
+    </div>
+
+
+</div>
+

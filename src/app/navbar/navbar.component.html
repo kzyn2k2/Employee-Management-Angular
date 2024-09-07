@@ -1,0 +1,14 @@
+<nav class="navibar">
+    <ul>
+      <li class="nav-title">Employee Management</li>
+      <li class="space"></li>
+      <li >
+        <button class="nav-but" (click)="toggleNav()"><mat-icon>{{open === true ? 'close' : 'menu'}}</mat-icon></button>
+      </li>
+      <li class="nav-menu" [class.open]="open">
+        <a class="navi-item"><span class="nav-text" routerLink="/employees"><i class="bi bi-people"></i> Employees</span></a>
+        <a class="navi-item" (click)="exportExcel()"><span class="nav-text"><i class="bi bi-filetype-xlsx"></i> Export</span></a>
+        <a class="navi-item"><span class="nav-text" (click)="importExcel()"><i class="bi bi-filetype-xlsx"></i> Import</span></a>
+      </li>
+    </ul>
+</nav>

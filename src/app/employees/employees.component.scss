@@ -1,0 +1,66 @@
+.container{
+  margin-top: 60px;
+  position: absolute;
+  width: 100vw;
+  max-width: none;
+
+}
+
+.hide{
+
+  display: inline;
+  @media (max-width: 765px) {
+    display: none;
+  }
+
+}
+
+.util-box{
+  text-align: center;
+}
+
+.searchbox{
+  display: flex;
+  justify-content: center;
+  @media (max-width: 765px) {
+    justify-content: flex-start;
+  }
+
+}
+
+
+.form-control{
+  width: 200px;
+  align-self: center;
+  border: 1px solid black;
+}
+
+.search{
+  background-color: #29335C;
+  color: white;
+}
+
+.pagination ::ng-deep .ngx-pagination .current {
+  margin-top: 15px;
+  font-size: 14px;
+  background-color: #29335C;
+}
+
+.spinner-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 250px;
+}
+
+.trow{
+  cursor: pointer;
+  background-color: #C9D6EA;
+}
+
+.theader{
+  background-color: #29335C;
+  color: white;
+}
+
+

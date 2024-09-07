@@ -1,0 +1,8 @@
+<h2 matDialogTitle>{{title}}</h2>
+<mat-dialog-content>
+  <p>{{message}}</p>
+</mat-dialog-content>
+<mat-dialog-actions class="d-flex justify-content-end">
+  <button class="btn btn-dialog me-2" (click)="onConfirm()"><i class="bi bi-check-lg"></i> Confirm</button>
+  <button class="btn btn-dialog" (click)="onCancel()"><i class="bi bi-x-lg"></i> Cancel</button>
+</mat-dialog-actions>
